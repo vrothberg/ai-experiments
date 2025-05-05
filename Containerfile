@@ -1,6 +1,6 @@
 # Use the official RHEL 9 bootc base image (adjust version as needed)
 # Check the Red Hat Ecosystem Catalog for the latest available version (e.g., 9.4)
-FROM registry.redhat.com/rhel9/rhel-bootc:9.4
+FROM registry.redhat.io/rhel9/rhel-bootc:9.4
 
 # Install the Apache web server package
 RUN dnf install -y httpd && \

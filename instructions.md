@@ -16,7 +16,7 @@ Create a file named `Containerfile` in a new directory. This file defines how yo
 ```Containerfile
 # Use the official RHEL 9 bootc base image (adjust version as needed)
 # Check the Red Hat Ecosystem Catalog for the latest available version (e.g., 9.4)
-FROM registry.redhat.com/rhel9/rhel-bootc:9.4
+FROM registry.redhat.io/rhel9/rhel-bootc:9.4
 
 # Install the Apache web server package
 RUN dnf install -y httpd && \
@@ -43,7 +43,7 @@ Navigate to the directory containing your `Containerfile` and run the build comm
 
 ```bash
 # Log in to the Red Hat registry (if you haven't already)
-podman login registry.redhat.com
+podman login registry.redhat.io
 
 # Build the image
 podman build -t my-rhel-bootc-httpd .
