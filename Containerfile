@@ -3,7 +3,7 @@
 FROM registry.redhat.io/rhel9/rhel-bootc:9.4
 
 # Install the Apache web server package
-RUN dnf install -y httpd && \
+RUN dnf install -y firewalld httpd && \
     # Clean up DNF cache
     dnf clean all
 
@@ -15,7 +15,7 @@ RUN echo "Hello from RHEL Image Mode (bootc) with httpd!" > /var/www/html/index.
 
 # Optional: Open port 80 in the firewall within the image
 # This makes testing easier once booted.
-RUN firewall-cmd --add-service=http --permanent
+RUN firewall-offline-cmd --add-service=http
 # Note: firewall-cmd --reload isn't needed here; the permanent rule will apply on boot.
 
 # You could add more custom configurations here if needed
