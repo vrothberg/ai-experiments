@@ -60,18 +60,15 @@ One common method involves running a command using the image itself (or an image
 ```bash
 # Create a directory to hold the output disk image
 mkdir ./disk
+touch config.toml
 
 # Run the image builder command using podman
 # This command runs the bootc image builder functionality *from within* your custom image
 # to generate a QCOW2 disk image in the ./disk directory.
-podman run --rm --privileged --pid=host \
-    -v ./disk:/output \
-    --security-opt label=disable \
-    localhost/my-rhel-bootc-httpd \
-    bootc-image-builder --type qcow2 --local /output/rhel-httpd.qcow2
+podman run --rm -it --privileged --pull=newer --security-opt label=type:unconfined_t -v ./config.toml:/config.toml:ro -v ./disk:/output -v /var/lib/containers/storage:/var/lib/containers/storage quay.io/centos-bootc/bootc-image-builder:latest --type qcow2 --use-librepo=True localhost/my-rhel-bootc-httpd
 
 # Check if the disk image was created
-ls -lh ./disk/rhel-httpd.qcow2
+ls -lh ./disk/qcow2/disk.qcow2
 ```
 
 * `--privileged` and `--pid=host`: Often required for the image builder to interact correctly with the system to create disk images.
@@ -88,14 +85,14 @@ Use QEMU/KVM (or your preferred hypervisor) to boot the generated QCOW2 image. W
 qemu-system-x86_64 \
     -m 2048 \
     -nographic \
-    -hda ./disk/rhel-httpd.qcow2 \
+    -hda ./disk/qcow2/disk.qcow2 \
     -net user,hostfwd=tcp::8080-:80 \
     -net nic
 ```
 
 * `-m 2048`: Allocate 2GB RAM to the VM.
 * `-nographic`: Run in console mode (useful for servers). Remove this if you prefer a graphical console.
-* `-hda ./disk/rhel-httpd.qcow2`: Use the generated disk image.
+* `-hda ./disk/qcow2/disk.qcow2`: Use the generated disk image.
 * `-net user,hostfwd=tcp::8080-:80`: Set up user-mode networking and forward TCP traffic from port 8080 on your host machine to port 80 inside the VM.
 * `-net nic`: Provide a virtual network card.
 
