@@ -1,5 +1,7 @@
 ## PROMPT: "Look at the attached Containerfile and give me instructions how to run it as a bootc VM."
 
+Comments are marked with a :warning:.
+
 To run the provided `Containerfile` as a bootc VM, you'll need to follow these general steps:
 
 **1. Build the Container Image:**
@@ -8,6 +10,8 @@ First, you need to build a container image from your `Containerfile`. [cite: 1]
 
 * Open your terminal and navigate to the directory where your `Containerfile` is saved.
 * Run the following command, replacing `your-image-name:tag` with a name and tag for your image (e.g., `my-rhel-bootc-httpd:latest`):
+
+**:warning: THIS SHOULD RUN AS ROOT FOR COMMANDS BELOW TO WORK**
 
     ```bash
     podman build -f Containerfile.txt -t your-image-name:tag .
