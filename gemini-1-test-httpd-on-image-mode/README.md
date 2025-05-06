@@ -1,5 +1,7 @@
 ## Prompt: "How can I test httpd on bootc and image mode for rhel"
 
+* To follow the required changes I had to perform to fix the instructions, look at the git history from commit 9294076ab97b to commit 32ab769ae66b.
+
 Okay, let's outline how you can test `httpd` (Apache web server) within a RHEL system managed using the `bootc`-based "Image Mode". This involves building a custom bootable container image that includes `httpd`, creating a bootable disk image from it, and then booting a VM from that disk image to perform the test.
 
 **Prerequisites:**
