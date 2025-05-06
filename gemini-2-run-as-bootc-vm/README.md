@@ -49,6 +49,7 @@ Next, you will use the `bootc-image-builder` tool to convert the container image
         --local \
         your-image-name:tag
     ```
+**:warning: we need to reference 'localhost/your-image-name:tag' as BIB does not otherwise resolve it correctly**
 
     * `--privileged` and `--security-opt label=type:unconfined_t` are often required for `bootc-image-builder` to perform tasks like creating disk images. [cite: 205, 206]
     * `-v $(pwd)/output:/output` maps your created output directory to the `/output` directory inside the container. [cite: 205, 206]
