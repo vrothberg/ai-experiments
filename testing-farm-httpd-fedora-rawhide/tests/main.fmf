@@ -1,9 +1,6 @@
-summary: Test httpd installation and service on Fedora rawhide
-plan:
-  name: /testing-farm-httpd-fedora-rawhide/plan
-  - /test
+summary: httpd installation and service test
 test:
-  /test:
+  /testing-farm-httpd-fedora-rawhide/tests/test:
     name: httpd-test
     adjust:
       - when: distro == fedora
