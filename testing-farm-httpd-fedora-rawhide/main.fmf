@@ -1,0 +1,14 @@
+summary: Test httpd installation and service on Fedora rawhide
+plan:
+  - /test
+test:
+  /test:
+    name: httpd-test
+    adjust:
+      - when: distro == fedora
+        continue: true
+      - when: distro != fedora
+        exclude: true
+    execute: ./test.sh
+environment:
+  image: fedora-rawhide
