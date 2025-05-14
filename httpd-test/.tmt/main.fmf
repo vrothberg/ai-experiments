@@ -1,0 +1,6 @@
+summary: Basic httpd test
+lv2:
+  environment:
+    compose: Fedora-Rawhide
+tests:
+  - name: /tests/httpd-install-test

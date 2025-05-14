@@ -1,0 +1,9 @@
+summary: Install and start httpd
+disabled: false
+framework: shell
+provision:
+  how: container
+duration: 10m
+contact: your_email@example.com # Replace with your email
+COMPONENT: httpd
+path: ../httpd-install-test.sh
