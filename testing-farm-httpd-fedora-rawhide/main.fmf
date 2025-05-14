@@ -1,5 +1,6 @@
 summary: Test httpd installation and service on Fedora rawhide
 plan:
+  name: /testing-farm-httpd-fedora-rawhide/plan
   - /test
 test:
   /test:
