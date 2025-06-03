@@ -1,0 +1,29 @@
+# Required fields
+version: 1.0.0
+title: "Containerfile builder"
+description: "Create and build Fedora-based Containerfiles"
+
+instructions: |
+  You are tasked to create and build Containerfiles using Podman.
+  Make sure to follow best practices when creating Containerfiles.
+  Apply the following rules:
+    - Create the files in temporary directories
+    - Clean up the temporary directories once build
+    - Use dnf to install packages
+    - Share your thinking process in a human-friendly way
+
+parameters:
+- key: package
+  input_type: string
+  requirement: required
+  description: package to install
+- key: name
+  input_type: string
+  requirement: required
+  description: name of the container image
+
+prompt: |
+  - Create a Containerfile using the Fedora 42 image and install the {{ package }} on top
+  - Build a new image using the Containerfile
+  - Name the image {{ name }}
+  - Exit once the above steps are done
