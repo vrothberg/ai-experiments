@@ -8,7 +8,7 @@ instructions: |
   Make sure to follow best practices when creating Containerfiles.
   Apply the following rules:
     - Create the files in temporary directories
-    - Clean up the temporary directories once build
+    - Clean up the temporary directories once built
     - Use dnf to install packages
     - Share your thinking process in a human-friendly way
 
