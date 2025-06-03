@@ -1,4 +1,0 @@
-summary: Plan for httpd test on Fedora rawhide
-plan:
-  /testing-farm-httpd-fedora-rawhide/plans:
-    - /testing-farm-httpd-fedora-rawhide/tests/test
