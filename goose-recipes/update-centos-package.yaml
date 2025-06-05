@@ -12,6 +12,7 @@ instructions: |
     - The Git user's email address is {{ git_email }}
     - Install tools automatically you need to perform the operations listed in the prompt
     - You can find packaging guidelines at https://docs.fedoraproject.org/en-US/packaging-guidelines/
+    - Create temporary directories with the `mktemp` tool.
 
 parameters:
 - key: package
