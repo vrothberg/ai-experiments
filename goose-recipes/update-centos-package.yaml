@@ -48,7 +48,7 @@ parameters:
 prompt: |
   - Find the location of the {{ package }} package at the desired Git project ({{ git_url }}).
   - Always use the {{ git_branch }} branch of the Git repository of the {{ package }} package.
-  - When cloning a Git repository, always use the Git scheme instead of the http one.  For instance, use "git@gitlab.com:redhat/centos-stream/rpms/podman.git" instead of "https://gitlab.com/redhat/centos-stream/rpms/podman.git".
+  - When cloning a Git repository, always use the Git scheme instead of the http one.  For instance, use "git@gitlab.com:redhat/centos-stream/rpms/podman.git" instead of "https://gitlab.com/redhat/centos-stream/rpms/podman.git".  Also make sure to use the -q option when running git-clone.
 
   - Now check if there is a newer version of the package available by incorporating the following guardrails:
      - The current version of the package can be found in the Version field of the RPM .spec file.
