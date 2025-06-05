@@ -1,0 +1,73 @@
+version: 0.1.0
+title: "Update a CentOS package and create a merge request"
+description: "Check whether the {{ package }} can be updated and create a merge request"
+
+# TODO:
+#  * Consider adding pointers to further packaging guidelines, best practices, workflows etc.
+instructions: |
+  Here are a couple of rules and useful information for you:
+    - All packages are separate Git repositories under the Gitlab project: {{ git_url }}
+    - You can find the package at {{ git_url }}/{{ package }}
+    - The Git user name is {{ git_user }}
+    - The Git user's email address is {{ git_email }}
+    - Install tools automatically you need to perform the operations listed in the prompt
+    - You can find packaging guidelines at https://docs.fedoraproject.org/en-US/packaging-guidelines/
+
+parameters:
+- key: package
+  input_type: string
+  requirement: required
+  description: Package to update
+- key: git_url
+  input_type: string
+  requirement: required
+  description: URL of the Git repository
+  default: https://gitlab.com/redhat/centos-stream/rpms
+- key: git_branch
+  input_type: string
+  requirement: required
+  description: Git branch of the update
+  default: c10s
+- key: git_user
+  input_type: string
+  requirement: required
+  description: Name of the Git user
+  default: RHEL Packaging Agent
+- key: git_email
+  input_type: string
+  requirement: required
+  description: Email address of the Git users
+  default: rhel-packaging-agent@redhat.com
+- key: gitlab_user
+  input_type: string
+  requirement: required
+  description: Name of the Gitlab user
+  default: vrothberg
+
+prompt: |
+  - Find the location of the {{ package }} package at the desired Git project ({{ git_url }}).
+  - Always use the {{ git_branch }} branch of the Git repository of the {{ package }} package.
+  - When cloning a Git repository, always use the Git scheme instead of the http one.  For instance, use "git@gitlab.com:redhat/centos-stream/rpms/podman.git" instead of "https://gitlab.com/redhat/centos-stream/rpms/podman.git".
+
+  - Now check if there is a newer version of the package available by incorporating the following guardrails:
+     - The current version of the package can be found in the Version field of the RPM .spec file.
+     - The latest version of the package can be found in the upstream project of {{ package }}.  Usually, there is a reference to the upstream project inside the .spec file.  That can be the URL field, a comment or references in the changelog.  Prefer references to Git repositories (e.g., GitHub or Gitlab, etc.) over ordinary websites.
+     - If there is no new version available, print a message and exit.  If there is a new version available follow the instructions below.
+
+  - Now update the package by creating a merge/pull request against the Git repository of the {{ package }} package.  Consider the below steps:
+    - First clone the Git repository of the {{ package }} package.  Do that in a temporary directory, so we are not polluting other parts of the system.
+    - Then update the {{ package }} package to the newer version you found before.  The update process can vary from package to package, but you may consider the following hints:
+      - The .spec file usually has references to the upstream Git repository that you already found before.
+      - The .spec file has references to the upstream version and tag or commit.  Those need to be set the upstream version, tag and commit corresponding the new version.
+      - Make sure to also add a new changelog.
+      - Use the `rpmlint` tool to make sure the changes to the .spec file did not introduce new errors.
+
+  - Now build the local .spec file to make sure the changes you made are correct
+
+  - Now commit the changes in the local Git repository. Use the same format as other Git commits you see in the Git log for the title and body of the Git commit.  The title should have the prefix "[DO NOT MERGE: AI EXPERIMENTS]".
+
+  - Now push the changes to Gitlab.  Use the Gitlab user {{ gitlab_user }}.  If a fork of the {{ package }} package does not exist for this user, create a fork and push the changes.
+
+  - Then open a merge/pull request with the new commit against the repository of the {{ package }} package.  Make sure to use the {{ git_branch }} branch.  To create the merge/pull request use the {{ gitlab_user }} Gitlab user.
+  
+  Follow the above steps and let me know where you cloned the Git repository.
