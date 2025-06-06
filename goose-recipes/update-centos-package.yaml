@@ -4,14 +4,14 @@ description: "Update the {{ package }} to a newer version"
 
 instructions: |
   Here are a couple of rules and useful information for you:
-    - You can find packaging guidelines at https://docs.fedoraproject.org/en-US/packaging-guidelines/
-    - All packages are separate Git repositories under the Gitlab project: {{ git_url }}
-    - You can find the package at {{ git_url }}/{{ package }}
-    - The Git user name is {{ git_user }}
-    - The Git user's email address is {{ git_email }}
-    - Use {{ gitlab_user }} as the GitLab user.
-    - Work only in a temporary directory. Create temporary directories with the `mktemp` tool.
-    - Always use GitLab's `glab` CLI tool to create forks and open merge requests.  Do not use the `git` tool.
+    * You can find packaging guidelines at https://docs.fedoraproject.org/en-US/packaging-guidelines/
+    * All packages are in separate Git repositories under the Gitlab project {{ git_url }}
+    * You can find the package at {{ git_url }}/{{ package }}
+    * The Git user name is {{ git_user }}
+    * The Git user's email address is {{ git_email }}
+    * Use {{ gitlab_user }} as the GitLab user.
+    * Work only in a temporary directory that you can create with the mktemp tool.
+    * Always use GitLab's glab CLI tool to create forks and open merge requests.  Do not use the git tool.
 
 # NOTE:
 #  * The Recipe currently assumes that the glab client has already been authenticated against GitLab.
