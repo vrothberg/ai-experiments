@@ -3,8 +3,7 @@ title: "Update a CentOS package and create a merge request"
 description: "Update the {{ package }} to a newer version"
 
 instructions: |
-  Here are a couple of rules and useful information for you:
-    * You can find packaging guidelines at https://docs.fedoraproject.org/en-US/packaging-guidelines/
+  A couple of rules that you must follow and useful information for you:
     * All packages are in separate Git repositories under the Gitlab project {{ git_url }}
     * You can find the package at {{ git_url }}/{{ package }}
     * The Git user name is {{ git_user }}
@@ -12,6 +11,7 @@ instructions: |
     * Use {{ gitlab_user }} as the GitLab user.
     * Work only in a temporary directory that you can create with the mktemp tool.
     * Always use GitLab's glab CLI tool to create forks and open merge requests.  Do not use the git tool.
+    * You can find packaging guidelines at https://docs.fedoraproject.org/en-US/packaging-guidelines/
 
 # NOTE:
 #  * The Recipe currently assumes that the glab client has already been authenticated against GitLab.
@@ -66,6 +66,9 @@ prompt: |
     * Only perform changes relevant for the version update.
     * Use the rpmlint tool to make sure that changes to the .spec file did not introduce new errors.
     * Build the local .spec file to make sure all changes are correct.
+    * Do not rename variables or comment existing lines out.
+    * Make sure that the commit looks similar to previous ones in the Git log that update the package version.
+    * Do not change if-else branches.
 
   5. Commit the changes:
     * Create a Git commit and use the same format as other Git commits in the Git log for the title and body of the Git commit.

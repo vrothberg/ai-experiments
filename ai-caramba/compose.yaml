@@ -1,0 +1,29 @@
+services:
+  mcp-atlassian:
+    image: ghcr.io/sooperset/mcp-atlassian:latest
+    ports:
+      - "9000:9000"
+    env_file:
+      - .env
+    command: ["--transport", "sse", "--port", "9000", "-vv"]
+    restart: unless-stopped
+
+  goose:
+    depends_on:
+      - mcp-atlassian
+    image: goose-container
+    build:
+      context: ./goose-container
+      dockerfile: Containerfile
+    env_file:
+      - .env
+    volumes:
+      - home-goose-persistent:/home/goose
+      - ./goose-recipes:/home/goose/recipes:ro,z
+      - ./goose-container/goose-config.yaml:/home/goose/.config/goose/config.yaml:ro,z
+    stdin_open: true
+    tty: true
+    restart: "no"
+
+volumes:
+  home-goose-persistent:
